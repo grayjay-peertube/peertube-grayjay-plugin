@@ -32,7 +32,7 @@ function getChannelPager(path, params, page) {
 	const start = (page ?? 0) * count;
 	params = { ... params, start, count }
 
-	const url = `${config.constants.baseUrl}${path}`;
+	const url = `${plugin.config.constants.baseUrl}${path}`;
 	const urlWithParams = `${url}${buildQuery(params)}`;
 	log("GET " + urlWithParams);
 	const res = http.GET(urlWithParams, {});
@@ -45,7 +45,7 @@ function getChannelPager(path, params, page) {
 	const obj = JSON.parse(res.body);
 
 	return new PeerTubeChannelPager(obj.data.map(v => {
-		return new PlatformAuthorLink(new PlatformID(PLATFORM, v.name, config.id), v.displayName, v.url, v.avatar ? `${config.constants.baseUrl}${v.avatar.path}` : "");
+		return new PlatformAuthorLink(new PlatformID(PLATFORM, v.name, config.id), v.displayName, v.url, v.avatar ? `${plugin.config.constants.baseUrl}${v.avatar.path}` : "");
 
 	}), obj.total > (start + count), path, params, page);
 }
@@ -57,7 +57,7 @@ function getVideoPager(path, params, page) {
 	const start = (page ?? 0) * count;
 	params = { ... params, start, count }
 
-	const url = `${config.constants.baseUrl}${path}`;
+	const url = `${plugin.config.constants.baseUrl}${path}`;
 	const urlWithParams = `${url}${buildQuery(params)}`;
 	log("GET " + urlWithParams);
 	const res = http.GET(urlWithParams, {});
@@ -73,11 +73,11 @@ function getVideoPager(path, params, page) {
 		return new PlatformVideo({
 			id: new PlatformID(PLATFORM, v.uuid, config.id),
 			name: v.name ?? "",
-			thumbnails: new Thumbnails([new Thumbnail(`${config.constants.baseUrl}${v.thumbnailPath}`, 0)]),
+			thumbnails: new Thumbnails([new Thumbnail(`${plugin.config.constants.baseUrl}${v.thumbnailPath}`, 0)]),
 			author: new PlatformAuthorLink(new PlatformID(PLATFORM, v.channel.name, config.id), 
 				v.channel.displayName, 
 				v.channel.url,
-				v.channel.avatar ? `${config.constants.baseUrl}${v.channel.avatar.path}` : ""),
+				v.channel.avatar ? `${plugin.config.constants.baseUrl}${v.channel.avatar.path}` : ""),
 			datetime: Math.round((new Date(v.publishedAt)).getTime() / 1000),
 			duration: v.duration,
 			viewCount: v.views,
@@ -95,7 +95,7 @@ function getCommentPager(path, params, page) {
 	const start = (page ?? 0) * count;
 	params = { ... params, start, count }
 
-	const url = `${config.constants.baseUrl}${path}`;
+	const url = `${plugin.config.constants.baseUrl}${path}`;
 	const urlWithParams = `${url}${buildQuery(params)}`;
 	log("GET " + urlWithParams);
 	const res = http.GET(urlWithParams, {});
@@ -110,7 +110,7 @@ function getCommentPager(path, params, page) {
 	return new PeerTubeCommentPager(obj.data.map(v => {
 		return new Comment({
 			contextUrl: url,
-			author: new PlatformAuthorLink(new PlatformID(PLATFORM, v.account.name, config.id), v.account.displayName, `${config.constants.baseUrl}/api/v1/video-channels/${v.account.name}`, ""),
+			author: new PlatformAuthorLink(new PlatformID(PLATFORM, v.account.name, config.id), v.account.displayName, `${plugin.config.constants.baseUrl}/api/v1/video-channels/${v.account.name}`, ""),
 			message: v.text,
 			rating: new RatingLikes(0),
 			date: Math.round((new Date(v.createdAt)).getTime() / 1000),
@@ -165,12 +165,12 @@ source.searchChannels = function (query) {
 };
 
 source.isChannelUrl = function(url) {
-	return url.startsWith(`${config.constants.baseUrl}/video-channels/`);
+	return url.startsWith(`${plugin.config.constants.baseUrl}/video-channels/`);
 };
 source.getChannel = function (url) {
 	const tokens = url.split('/');
 	const handle = tokens[tokens.length - 1];
-	const urlWithParams = `${config.constants.baseUrl}/api/v1/video-channels/${handle}`;
+	const urlWithParams = `${plugin.config.constants.baseUrl}/api/v1/video-channels/${handle}`;
 	log("GET " + urlWithParams);
 	const res = http.GET(urlWithParams, {});
 
@@ -184,7 +184,7 @@ source.getChannel = function (url) {
 	return new PlatformChannel({
 		id: new PlatformID(PLATFORM, obj.name, config.id),
 		name: obj.displayName,
-		thumbnail: obj.avatar ? `${config.constants.baseUrl}${obj.avatar.path}` : "",
+		thumbnail: obj.avatar ? `${plugin.config.constants.baseUrl}${obj.avatar.path}` : "",
 		banner: null,
 		subscribers: obj.followersCount,
 		description: obj.description ?? "",
@@ -220,7 +220,7 @@ source.getChannelContents = function (url, type, order, filters) {
 };
 
 source.isContentDetailsUrl = function(url) {
-	return url.startsWith(`${config.constants.baseUrl}/videos/watch/`);
+	return url.startsWith(`${plugin.config.constants.baseUrl}/videos/watch/`);
 };
 
 const supportedResolutions = {
@@ -234,7 +234,7 @@ const supportedResolutions = {
 source.getContentDetails = function (url) {
 	const tokens = url.split('/');
 	const handle = tokens[tokens.length - 1];
-	const urlWithParams = `${config.constants.baseUrl}/api/v1/videos/${handle}`;
+	const urlWithParams = `${plugin.config.constants.baseUrl}/api/v1/videos/${handle}`;
 	log("GET " + urlWithParams);
 	const res = http.GET(urlWithParams, {});
 
@@ -280,11 +280,11 @@ source.getContentDetails = function (url) {
 	return new PlatformVideoDetails({
 		id: new PlatformID(PLATFORM, obj.uuid, config.id),
 		name: obj.name,
-		thumbnails: new Thumbnails([new Thumbnail(`${config.constants.baseUrl}${obj.thumbnailPath}`, 0)]),
+		thumbnails: new Thumbnails([new Thumbnail(`${plugin.config.constants.baseUrl}${obj.thumbnailPath}`, 0)]),
 		author: new PlatformAuthorLink(new PlatformID(PLATFORM, obj.channel.name, config.id), 
 			obj.channel.displayName, 
 			obj.channel.url,
-			obj.channel.avatar ? `${config.constants.baseUrl}${obj.channel.avatar.path}` : ""),
+			obj.channel.avatar ? `${plugin.config.constants.baseUrl}${obj.channel.avatar.path}` : ""),
 		datetime: Math.round((new Date(obj.publishedAt)).getTime() / 1000),
 		duration: obj.duration,
 		viewCount: obj.views,
