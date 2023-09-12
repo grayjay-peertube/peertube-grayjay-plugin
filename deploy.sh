@@ -7,9 +7,10 @@ touch $DOCUMENT_ROOT/maintenance.file
 
 # Swap over the content
 echo "Deploying content..."
-cp peertube.png $DOCUMENT_ROOT/
-cp PeerTubeConfig.json $DOCUMENT_ROOT/
-cp PeerTubeScript.js $DOCUMENT_ROOT/
+mkdir -p $DOCUMENT_ROOT/PeerTube
+cp peertube.png $DOCUMENT_ROOT/PeerTube
+cp PeerTubeConfig.json $DOCUMENT_ROOT/PeerTube
+cp PeerTubeScript.js $DOCUMENT_ROOT/PeerTube
 
 # Notify Cloudflare to wipe the CDN cache
 echo "Purging Cloudflare cache..."
