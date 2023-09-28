@@ -11,6 +11,7 @@ mkdir -p $DOCUMENT_ROOT/PeerTube
 cp peertube.png $DOCUMENT_ROOT/PeerTube
 cp PeerTubeConfig.json $DOCUMENT_ROOT/PeerTube
 cp PeerTubeScript.js $DOCUMENT_ROOT/PeerTube
+sh sign.sh $DOCUMENT_ROOT/PeerTube/PeerTubeScript.js $DOCUMENT_ROOT/PeerTube/PeerTubeConfig.json
 
 # Notify Cloudflare to wipe the CDN cache
 echo "Purging Cloudflare cache for zone $CLOUDFLARE_ZONE_ID..."
