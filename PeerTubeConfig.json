@@ -7,9 +7,9 @@
 	"sourceUrl": "https://gabe.rocks/grayjay-pt/PeerTubeConfig.json",
 	"repositoryUrl": "https://code.gabe.rocks/gabriel/peertube-grayjay",
 	"scriptUrl": "./PeerTubeScript.js",
-	"version": 20,
+	"version": 1,
 	
-	"iconUrl": "./peertube.png",
+	"iconUrl": "./icon.png",
 	"id": "d770c577-e9ec-4435-a78a-f83fb9064bdf",
 	
 	"scriptSignature": "",
@@ -18,7 +18,7 @@
 	
 	"allowEval": false,
 	"allowUrls": [
-		"everywhere"
+		"https://peertube.libresolutions.network"
 	],
 
 	"constants": {
