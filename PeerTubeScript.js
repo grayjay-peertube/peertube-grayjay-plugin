@@ -81,7 +81,7 @@ function getVideoPager(path, params, page) {
 			datetime: Math.round((new Date(v.publishedAt)).getTime() / 1000),
 			duration: v.duration,
 			viewCount: v.views,
-			url: v.url,
+			url: "https://peertube.libresolutions.network"+ v.url.substring(v.url.search("/videos/")),
 			isLive: v.isLive
 		});
 
@@ -283,7 +283,7 @@ source.getContentDetails = function (url) {
 		thumbnails: new Thumbnails([new Thumbnail(`${plugin.config.constants.baseUrl}${obj.thumbnailPath}`, 0)]),
 		author: new PlatformAuthorLink(new PlatformID(PLATFORM, obj.channel.name, config.id), 
 			obj.channel.displayName, 
-			obj.channel.url,
+			plugin.config.constants.baseUrl + obj.channel.url.substring(obj.channel.url.search("/videos/watch")),
 			obj.channel.avatar ? `${plugin.config.constants.baseUrl}${obj.channel.avatar.path}` : ""),
 		datetime: Math.round((new Date(obj.publishedAt)).getTime() / 1000),
 		duration: obj.duration,
