@@ -1,6 +1,6 @@
 {
 	"name": "PeerTube - LSN",
-	"description": "A plugin that adds PeerTube as a source",
+	"description": "A fork of the FUTO PeerTube plugin that allows access to remote videos for the Libre Solutions Network peertube instance.",
 	"author": "Gabriel",
 	"authorUrl": "https://gabe.rocks",
 	
