@@ -18,7 +18,7 @@
 	
 	"allowEval": false,
 	"allowUrls": [
-		"https://peertube.libresolutions.network"
+		"peertube.libresolutions.network"
 	],
 
 	"constants": {
