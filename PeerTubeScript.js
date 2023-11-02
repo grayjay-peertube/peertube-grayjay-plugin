@@ -126,7 +126,7 @@ source.enable = function (conf) {
 
 source.getHome = function () {
 	return getVideoPager('/api/v1/videos', {
-		sort: "best"
+		sort: "-publishedAt"
 	}, 0);
 };
 

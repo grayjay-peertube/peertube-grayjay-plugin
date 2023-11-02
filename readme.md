@@ -6,6 +6,7 @@ I forked the official [peertube plugin](https://gitlab.futo.org/videostreaming/p
 My solution isn't very elegant, I'm not familiar with typescript, but this plugin will allow you to browse videos within the network for the [Libre Solutions Network PeerTube](https://peertube.libresolutions.network.)
 
 ## Changes made: 
+- Changing from trending peertube videos to most recent
 - Setting the baseURL to `peertube.libresolutions.network` 
 - To allow remote videos to load, i had to hardcode `getVideoPager` url parameter with: 
 ```url: "https://peertube.libresolutions.network"+ v.url.substring(v.url.search("/videos/")),```
