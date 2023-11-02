@@ -4,7 +4,7 @@
 	"author": "Gabriel",
 	"authorUrl": "https://gabe.rocks",
 	
-	"sourceUrl": "http://10.0.0.2:8000/PeerTubeConfig.json",
+	"sourceUrl": "https://gabe.rocks/grayjay-pt/PeerTubeConfig.json",
 	"repositoryUrl": "https://code.gabe.rocks/gabriel/peertube-grayjay",
 	"scriptUrl": "./PeerTubeScript.js",
 	"version": 20,
